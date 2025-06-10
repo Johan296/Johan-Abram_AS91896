@@ -1,10 +1,18 @@
-#Music Quiz 
+print("""
+  __  __           _         ____        _      
+ |  \/  |         (_)       / __ \      (_)     
+ | \  / |_   _ ___ _  ___  | |  | |_   _ _ ____ 
+ | |\/| | | | / __| |/ __| | |  | | | | | |_  / 
+ | |  | | |_| \__ \ | (__  | |__| | |_| | |/ /  
+ |_|  |_|\__,_|___/_|\___|  \___\_\\__,_|_/___| 
+                                                                                               
+""")
 # This is a simple music quiz coding that asks the user five questions about music.
 score = 0
 print("Welcome to the Music Quiz!")
 print("This is a quiz about famous music artists and their songs.")
 
-# Question 1
+# Question 1 
 print("What is the name of the artist who got featured in the song 'Like that'?")
 print("a) Drake")
 print("b) Kendrick Lamar")
@@ -95,7 +103,7 @@ else:
     print("-------------------------")
 
 # Question 7
-print("Which animated series did D4vd's song 'Feel it' got played?")
+print("In which animated series did D4vd's song 'Feel it' got played?")
 print("a) Devil may cry")
 print("b) My hero academia")
 print("c) Tokyo Ghoul")
