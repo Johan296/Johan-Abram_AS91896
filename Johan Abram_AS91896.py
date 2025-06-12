@@ -1,7 +1,7 @@
-import random
+#This is a simple Pokémon game where the player chooses a Pokémon and battles against another Pokémon.
 
 print("""
- ______     _                                _____                       
+______     _                                ______                       
 | ___ \   | |                              |  __ \                      
 | |_/ /__ | | _____ _ __ ___   ___  _ __   | |  \/ __ _ _ __ ___   ___  
 |  __/ _ \| |/ / _ \ '_ ` _ \ / _ \| '_ \  | | __ / _` | '_ ` _ \ / _ \ 
@@ -11,37 +11,43 @@ print("""
 
 print("Welcome to the Pokémon Game!")
 print("In this game, you will choose a Pokémon and battle against another Pokémon.")
-trainer_name = input(" Please enter your trainer name: ")
-print(f"Welcome, {trainer_name}! Let's start your Pokémon adventure!")
+game = input("Are you ready to start your Pokémon adventure? (yes/no): ").lower()
+if game == "yes":
+    print("Lets get started!")
+elif game == "no":
+    print("No problem! You can come back anytime to play.")
+    exit()
+trainer_name = input("First of all, Please enter your trainer name: ")
+print("Welcome, {}! Let's start your Pokémon adventure!".format(trainer_name))
 
-pokemon_list = {
-    "Charizard": {"type":"Fire","hp": 310,"attack": 50},
-    "Blastoise": {"type":"Water","hp": 320,"attack": 52},
-    "Venusaur": {"type":"Grass","hp": 350,"attack": 45},
-    "Raichu": {"type":"Electric","hp": 200,"attack": 60}
-}
+print("------------------------------------")
 
-type_chart = {
-    "Fire": "Grass",
-    "Water": "Fire",
-    "Grass": "Water",
-    "Electric": "Water",
-}
+print("Here is the list of available starter Pokémons and their type charts:")
+print("This is the Type Chart,\n  Fire > Grass\n  Water > Fire\n  Grass > Water\n  Electric > Water")
+print("------------------------------------")
+print("Choose your Pokémon wisely, as each type has its strengths and weaknesses!")
+print("a)Pikachu: Type: Electric, hp: 190, attack:20"),
+print("b)Squitle: Type: Water, hp: 220, attack:20"),
+print("c)Charmander: Type: Fire, hp: 200, attack:20"),
+print("d)Bulbasaur: Type: Grass, hp: 230, attack:20")
 
-def choose_pokemon():
-    print("Choose your Pokémon:")
-    for index, name in enumerate(pokemon_list.keys(), 1):
-        print(f"{index}. {name}")
-    while True:
-        try:
-            choice = int(input("Enter the number of your Pokemon: "))
-            if 1 <= choice <= len(pokemon_list):
-                return list(pokemon_list.keys())[choice - 1]
-            else:
-                print("Invalid choice. Try again.")
-        except ValueError:
-            print("Please enter a valid number.")
-
-
-
-print("Game over.")
+choose_pokemon = input("Please choose your Pokémon (Enter: a,b,c,d): ").lower()
+if choose_pokemon == "a":
+    print("You have chosen Pikachu!")
+    player_pokemon = {"name": "Pikachu", "type": "Electric", "hp": 190, "attack": 20}
+elif choose_pokemon == "b":
+    print("You have chosen Squirtle!")
+    player_pokemon = {"name": "Squirtle", "type": "Water", "hp": 220, "attack": 20}
+elif choose_pokemon == "c":
+    print("You have chosen Charmander!")
+    player_pokemon = {"name": "Charmander", "type": "Fire", "hp": 200, "attack": 20}
+elif choose_pokemon == "d":
+    print("You have chosen Bulbasaur!")
+    player_pokemon = {"name": "Bulbasaur", "type": "Grass", "hp": 230, "attack": 20}
+else:
+    print("Invalid choice! Please restart the game and choose a valid Pokémon.")
+print("------------------------------------")
+print("You have chosen {} which is a {} type and has {} hp.".format(player_pokemon["name"], player_pokemon["type"], player_pokemon["hp"]))
+print("Now, the story begins...")
+print("------------------------------------")
+    
