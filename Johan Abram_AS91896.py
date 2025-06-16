@@ -1,4 +1,5 @@
 import random
+import msvcrt
 
 # This is a simple Pokémon game where the player chooses a Pokémon and battles against another Pokémon.
 print(""" 
@@ -22,10 +23,10 @@ elif choice == "no":
                 print("You decide to stay home and play video games instead. Maybe another time!")
                 exit()
 
-print("You arrive at Professor's lab, but you are a bit late. So there aren't many Pokétmons to choose from.")
-print("You feel a bit sad, but Professor Clark assures you that there are still some great Pokétmons left for you to choose from.")
+print("But you arrive at Professor's lab a bit late. So there aren't many Pokétmons to choose from.")
+print("So you are a bit sad, but Professor Clark assures you that there are still some great Pokétmons left for you to choose from.")
 
-choose = input("\nHe then asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
+choose = input("\nHe asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
 if choose == "yes":
                 print("Professor Clark shows you the remaining Pokétmons available for you to choose from.\n")
 elif choose == "no":
@@ -70,10 +71,10 @@ opponents = [
                 {"name": "Pyroot", "type": "Fire", "hp": 180, "attack": 18},
                 {"name": "Mewloo", "type": "Psychic", "hp": 220, "attack": 20},
                 {"name": "Moonpuffs", "type": "Fairy", "hp": 140, "attack": 14},
-                {"name": "Roadent", "type": "Ground", "hp": 250, "attack": 14}
+                {"name": "Roadent", "type": "Ground", "hp": 250, "attack": 18},
                 {"name": "Rocker", "type": "Rock", "hp": 200, "attack": 20},
                 {"name": "Fluffin", "type": "Normal", "hp": 190, "attack": 19},
-                {"name": "Buzzy", "type": "Bug", "hp": 170, "attack": 17},
+                {"name": "Buzzy", "type": "Bug", "hp": 170, "attack": 17}
 ]
 
 opponent = random.choice(opponents)
@@ -81,17 +82,19 @@ print("It's a wild {} It has {} hp.".format(opponent["name"], opponent["hp"]))
 print("You call in your Pokétmon {} to battle against the wild {}!".format(player_poketmon["name"], opponent["name"]))
 
 # Begin battle loop
+print("Press [space] to attack, or type 'run' to run away.")
 while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
     print("What do you want to do? (attack/run)")
-    action = input("> ").lower()
-    if action == "attack":
+    print("Press [space] to attack, or type 'run' and press [Enter] to run away.")
+    action = msvcrt.getwch()
+    if action == ' ':
         opponent["hp"] -= player_poketmon["attack"]
         print(f"You attacked {opponent['name']}! Its HP is now {opponent['hp']}.")
         if opponent["hp"] <= 0:
             print("You won the battle!🎉")
             break
         player_poketmon["hp"] -= opponent["attack"]
-        print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}.")
+        print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}.\n")
         if player_poketmon["hp"] <= 0:
             print("You fainted... better luck next time! 💫")
             break
