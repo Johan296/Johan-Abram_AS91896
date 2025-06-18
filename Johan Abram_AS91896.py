@@ -82,7 +82,8 @@ opponents = [
         {"name": "Roadent", "stamina": 140, "hp": 250, "attack": 18},
         {"name": "Rocker", "stamina": 125, "hp": 200, "attack": 20},
         {"name": "Fluffin", "stamina": 115, "hp": 190, "attack": 19},
-        {"name": "Buzzy", "stamina": 105, "hp": 170, "attack": 17}
+        {"name": "Buzzy", "stamina": 105, "hp": 170, "attack": 17},
+        {"name": "Nignog", "stamina": 200, "hp": 160, "attack": 21}
 ]
 
 # Randomly spawns an opponent
