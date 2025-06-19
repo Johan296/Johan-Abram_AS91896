@@ -1,7 +1,7 @@
 import random
 import msvcrt
 
-# Prints welcome message
+ # Prints welcome message
 print(""" 
   ____       _        _                         
  |  _ \ ___ | | _____| |_ _ __ ___   ___  _ __  
@@ -53,16 +53,16 @@ while choose_poketmon not in ["a", "b", "c", "d"]:
 # Assigned Pokétmon stats based on choice
 if choose_poketmon == "a":
         print("That's a great choice, Nimbolts are very friendly!")
-        player_poketmon = {"name": "Nimbolt", "stamina": 150, "hp": 210, "attack": 22}
+        player_poketmon = {"name": "Nimbolt", "stamina": 60, "hp": 210, "attack": 22}
 elif choose_poketmon == "b":
         print("Solid choice! Hydrozoa is always cool under pressure!")
-        player_poketmon = {"name": "Hydrozoa", "stamina": 150, "hp": 220, "attack": 22}
+        player_poketmon = {"name": "Hydrozoa", "stamina": 60, "hp": 220, "attack": 22}
 elif choose_poketmon == "c":
         print("Strong choice!")
-        player_poketmon = {"name": "Ivyrex", "stamina": 160, "hp": 230, "attack": 21}
+        player_poketmon = {"name": "Ivyrex", "stamina": 40, "hp": 230, "attack": 30}
 elif choose_poketmon == "d":
         print("Hmm Hollowby, scary choice!")
-        player_poketmon = {"name": "Hollowby", "stamina": 150, "hp": 205, "attack": 23}
+        player_poketmon = {"name": "Hollowby", "stamina": 60, "hp": 205, "attack": 23}
 print("")
 
 # Confirm player's Pokémon and start adventure
@@ -75,43 +75,57 @@ print("You head deep into the forest where you encounter a Pokétmon!\n")
 
 # Random wild opponent Pokétmon
 opponents = [
-        {"name": "Pigot", "stamina": 100, "hp": 160, "attack": 16},
-        {"name": "Pyroot", "stamina": 120, "hp": 180, "attack": 18},
-        {"name": "Mewloo", "stamina": 150, "hp": 220, "attack": 20},
-        {"name": "Moonpuffs", "stamina": 110, "hp": 140, "attack": 14},
-        {"name": "Roadent", "stamina": 140, "hp": 250, "attack": 18},
-        {"name": "Rocker", "stamina": 125, "hp": 200, "attack": 20},
-        {"name": "Fluffin", "stamina": 115, "hp": 190, "attack": 19},
-        {"name": "Buzzy", "stamina": 105, "hp": 170, "attack": 17},
-        {"name": "Nignog", "stamina": 200, "hp": 160, "attack": 21}
+        {"name": "Pigot", "stamina": 50, "hp": 160, "attack": 16},
+        {"name": "Pyroot", "stamina": 50, "hp": 180, "attack": 18},
+        {"name": "Mewloo", "stamina": 0, "hp": 220, "attack": 20},
+        {"name": "Moonpuffs", "stamina": 20, "hp": 140, "attack": 14},
+        {"name": "Roadent", "stamina": 10, "hp": 230, "attack": 30},
+        {"name": "Rocker", "stamina": 30, "hp": 200, "attack": 20},
+        {"name": "Fluffin", "stamina": 50, "hp": 190, "attack": 19},
+        {"name": "Buzzy", "stamina": 40, "hp": 170, "attack": 17},
+        {"name": "Nignog", "stamina": 50, "hp": 160, "attack": 21}
 ]
 
 # Randomly spawns an opponent
 opponent = random.choice(opponents)
 print("It's a wild {} It has {} hp.".format(opponent["name"], opponent["hp"]))
-print("You call in your Pokétmon {} to battle against the wild {}!".format(player_poketmon["name"], opponent["name"]))
+print("You call in your Pokétmon {} to battle against the wild {}!\n".format(player_poketmon["name"], opponent["name"]))
 
-# Battle loop: player and opponent take turns attacking
+# Battle loop: player and opponent take turns attacking, using stamina
 print("Press [space] to attack, or type 'run' to run away.")
 while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
         print("What do you want to do? (attack/run)")
         print("Press [space] to attack, or type 'run' and press [L] to run away.")
         action = msvcrt.getwch()
         if action == ' ':
-                # Player attacks opponent
-                opponent["hp"] -= player_poketmon["attack"]
-                print(f"You attacked {opponent['name']}! Its HP is now {opponent['hp']}.")
-                if opponent["hp"] <= 0:
-                        print("You won the battle!🎉")
-                        break
-                # Opponent attacks back
-                player_poketmon["hp"] -= opponent["attack"]
-                print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}.\n")
-                if player_poketmon["hp"] <= 0:
-                        print("You fainted... better luck next time! 💫")
-                        break
+                # Check if player has stamina
+                if player_poketmon["stamina"] > 0:
+                        opponent["hp"] -= player_poketmon["attack"]
+                        player_poketmon["stamina"] -= 10  # Use stamina per attack
+                        print(f"You attacked {opponent['name']}! Its HP is now {opponent['hp']}. Your stamina is now {player_poketmon['stamina']}.")
+                        if opponent["hp"] <= 0:
+                                print("You won the battle!🎉")
+                                break
+                else:
+                        print("You're out of stamina! You must recharge this turn.")
+                        player_poketmon["stamina"] += 20  # Recharge stamina
+                        print(f"{player_poketmon['name']} is recharging... Stamina is now {player_poketmon['stamina']}.")
+                        # Skip attack this turn
+
+                # Opponent's turn
+                if opponent["hp"] > 0:
+                        if opponent["stamina"] > 0:
+                                player_poketmon["hp"] -= opponent["attack"]
+                                opponent["stamina"] -= 10
+                                print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}. {opponent['name']}'s stamina is now {opponent['stamina']}.\n")
+                                if player_poketmon["hp"] <= 0:
+                                        print("You fainted... better luck next time! 💫")
+                                        break
+                        else:
+                                print(f"{opponent['name']} is out of stamina and must recharge!")
+                                opponent["stamina"] += 20
+                                print(f"{opponent['name']} is recharging... Stamina is now {opponent['stamina']}.\n")
         elif action == 'l':
-                # Player runs away
                 print("You ran away safely.")
                 break
         else:
