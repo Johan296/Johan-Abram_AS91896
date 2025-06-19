@@ -95,7 +95,7 @@ print("You call in your Pokétmon {} to battle against the wild {}!".format(play
 print("Press [space] to attack, or type 'run' to run away.")
 while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
         print("What do you want to do? (attack/run)")
-        print("Press [space] to attack, or type 'run' and press [Enter] to run away.")
+        print("Press [space] to attack, or type 'run' and press [L] to run away.")
         action = msvcrt.getwch()
         if action == ' ':
                 # Player attacks opponent
@@ -110,7 +110,7 @@ while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
                 if player_poketmon["hp"] <= 0:
                         print("You fainted... better luck next time! 💫")
                         break
-        elif action == "run":
+        elif action == 'l':
                 # Player runs away
                 print("You ran away safely.")
                 break
