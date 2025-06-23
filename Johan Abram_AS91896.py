@@ -45,10 +45,10 @@ elif choose == "no":
 
 # Show available Pokétmon choices
 print("Here are the available Pokétmons, choose them wisely, as each type has its strengths and weaknesses!")
-print("a) Nimbolt:   stamina: 150 | hp: 210 | attack: 22 |")
-print("b) Hydrozoa:  stamina: 150 | hp: 220 | attack: 22 |")
-print("c) Ivyrex:    stamina: 160 | hp: 230 | attack: 21 |")
-print("d) Hollowby:  stamina: 150 | hp: 205 | attack: 23 |")
+print("a) Nimbolt:   stamina: 50 | hp: 210 | attack: 20 |")
+print("b) Hydrozoa:  stamina: 50 | hp: 220 | attack: 22 |")
+print("c) Ivyrex:    stamina: 60 | hp: 230 | attack: 21 |")
+print("d) Hollowby:  stamina: 50 | hp: 205 | attack: 25 |")
 
 # Player chooses their Pokétmon
 choose_poketmon = input("\nPlease choose your Pokétmon (Enter: a,b,c,d): ").lower()
@@ -59,21 +59,21 @@ while choose_poketmon not in ["a", "b", "c", "d"]:
 # Assigned Pokétmon stats based on choice
 if choose_poketmon == "a":
         print("That's a great choice, Nimbolts are very friendly!")
-        player_poketmon = {"name": "Nimbolt", "stamina": 60, "hp": 210, "attack": 22}
+        player_poketmon = {"name": "Nimbolt", "stamina": 50, "hp": 210, "attack": 20}
 elif choose_poketmon == "b":
         print("Solid choice! Hydrozoa is always cool under pressure!")
-        player_poketmon = {"name": "Hydrozoa", "stamina": 60, "hp": 220, "attack": 22}
+        player_poketmon = {"name": "Hydrozoa", "stamina": 50, "hp": 220, "attack": 22}
 elif choose_poketmon == "c":
         print("Strong choice!")
-        player_poketmon = {"name": "Ivyrex", "stamina": 40, "hp": 230, "attack": 30}
+        player_poketmon = {"name": "Ivyrex", "stamina": 60, "hp": 230, "attack": 21}
 elif choose_poketmon == "d":
         print("Hmm Hollowby, scary choice!")
-        player_poketmon = {"name": "Hollowby", "stamina": 60, "hp": 205, "attack": 23}
+        player_poketmon = {"name": "Hollowby", "stamina": 50, "hp": 205, "attack": 25}
 print("")
 
 # Confirm player's Pokémon and start adventure
 print(f"Trainer {trainer_name} has chosen {player_poketmon['name']} which has {player_poketmon['stamina']} stamina and {player_poketmon['hp']} hp.")
-print("Congrats on choosing your first Pokétmon!")
+print("Congratulations on choosing your first Pokétmon!")
 print("")
 print("You head out of the lab with your new Poketmon")
 print("You are offered two choices now, either go to the Creek Forest for a exciting adventure or go back home with your new Pokétmon.")
@@ -90,22 +90,27 @@ elif choose == "h":
         print("You decide to go back home with your new Pokétmon. You play with it and train for a while.")
         print("Not ready for an adventure yet. Maybe next time")
         exit()
-# Random wild opponent Pokétmon
+
+# List of random wild opponent Pokétmon
 opponents = [
-        {"name": "Pigot", "stamina": 50, "hp": 160, "attack": 16},
-        {"name": "Pyroot", "stamina": 50, "hp": 180, "attack": 18},
-        {"name": "Mewloo", "stamina": 40, "hp": 220, "attack": 20},
+        {"name": "Pigot", "stamina": 40, "hp": 160, "attack": 16},
+        {"name": "Pyroot", "stamina": 30, "hp": 180, "attack": 18},
+        {"name": "Mewloo", "stamina": 50, "hp": 220, "attack": 20},
         {"name": "Moonpuffs", "stamina": 20, "hp": 140, "attack": 14},
         {"name": "Roadent", "stamina": 10, "hp": 230, "attack": 30},
         {"name": "Rocker", "stamina": 30, "hp": 200, "attack": 20},
         {"name": "Fluffin", "stamina": 50, "hp": 190, "attack": 19},
         {"name": "Buzzy", "stamina": 40, "hp": 170, "attack": 17},
-        {"name": "Nignog", "stamina": 50, "hp": 160, "attack": 21}
+        {"name": "Nignog", "stamina": 50, "hp": 160, "attack": 21},
+        {"name": "Froggit", "stamina": 30, "hp": 180, "attack": 18},
+        {"name": "Sparky", "stamina": 40, "hp": 200, "attack": 20},
+        {"name": "Flameo", "stamina": 50, "hp": 210, "attack": 22},
+        {"name": "Leafy", "stamina": 50, "hp": 220, "attack": 23},
 ]
 
 # Randomly spawns an opponent
 opponent = random.choice(opponents)
-print("It's a wild {} It has {} hp.".format(opponent["name"], opponent["hp"]))
+print("It's a wild {} it has {} hp.".format(opponent["name"], opponent["hp"]))
 print("You call in your Pokétmon {} to battle against the wild {}!\n".format(player_poketmon["name"], opponent["name"]))
 
 # Battle loop: player and opponent take turns attacking, using stamina
