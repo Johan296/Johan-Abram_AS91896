@@ -18,7 +18,10 @@ print("You wake up in Paimon Town, where you have always dreamed of becoming a P
 print("You get a call from Professor Clark, who tells you to come to his lab.")
 
 # First decision: go to the lab or not
-choice = input("Do you go to the lab? (yes/no): ").lower()
+choice = input("\nDo you go to the lab? (yes/no): ").lower()
+while choice not in ["yes", "no"]:
+        print("Invalid choice, Please enter 'yes' or 'no'")
+        choice = input("\nDo you go to the lab? (yes/no): ").lower()
 if choice == "yes":
         print("\nYou head to Professor Clark's lab with excitement!.")
 elif choice == "no":
@@ -31,6 +34,9 @@ print("So you are a bit sad, but Professor Clark assures you that there are stil
 
 # Second decision: Choose a Pokétmon or not
 choose = input("\nHe asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
+while choose not in ["yes", "no"]:
+        print("Invalid choice, Please enter 'yes' or 'no'")
+        choose = input("\nHe asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
 if choose == "yes":
         print("Professor Clark shows you the remaining Pokétmons available for you to choose from.\n")
 elif choose == "no":
@@ -48,7 +54,7 @@ print("d) Hollowby:  stamina: 150 | hp: 205 | attack: 23 |")
 choose_poketmon = input("\nPlease choose your Pokétmon (Enter: a,b,c,d): ").lower()
 while choose_poketmon not in ["a", "b", "c", "d"]:
         print("Invalid choice! Please choose a valid Pokétmon.")
-        choose_poketmon = input("Please choose your Pokétmon (Enter: a,b,c,d): ").lower()
+        choose_poketmon = input("\nPlease choose your Pokétmon (Enter: a,b,c,d): ").lower()
 
 # Assigned Pokétmon stats based on choice
 if choose_poketmon == "a":
@@ -67,17 +73,28 @@ print("")
 
 # Confirm player's Pokémon and start adventure
 print(f"Trainer {trainer_name} has chosen {player_poketmon['name']} which has {player_poketmon['stamina']} stamina and {player_poketmon['hp']} hp.")
-print("You are now ready to start the battle with your new Pokétmon!")
+print("Congrats on choosing your first Pokétmon!")
 print("")
-print("You head out of the lab with your new Poketmon, and you enter the Creek Forest")
-print("You are now in the Creek Forest, the most bizzare forest which is filled with a lot of wild and rare Pokétmons.")
-print("You head deep into the forest where you encounter a Pokétmon!\n")
+print("You head out of the lab with your new Poketmon")
+print("You are offered two choices now, either go to the Creek Forest for a exciting adventure or go back home with your new Pokétmon.")
 
+# Third decision: choose between forest or home
+choose = input("\nEnter 'f' for forest or 'h' for house: ").lower()
+while choose not in ["f", "h"]:
+        print("Invalid choice, Please enter 'f' for forest or 'h' for house")
+        choose = input("\nEnter 'f' for forest or 'h' for house").lower()
+if choose == "f":     
+      print("You are now in the Creek Forest, the most bizzare forest which is filled with a lot of wild and rare Pokétmons.")
+      print("You head deep into the forest where you encounter a Pokétmon!\n")
+elif choose == "h":
+        print("You decide to go back home with your new Pokétmon. You play with it and train for a while.")
+        print("Not ready for an adventure yet. Maybe next time")
+        exit()
 # Random wild opponent Pokétmon
 opponents = [
         {"name": "Pigot", "stamina": 50, "hp": 160, "attack": 16},
         {"name": "Pyroot", "stamina": 50, "hp": 180, "attack": 18},
-        {"name": "Mewloo", "stamina": 0, "hp": 220, "attack": 20},
+        {"name": "Mewloo", "stamina": 40, "hp": 220, "attack": 20},
         {"name": "Moonpuffs", "stamina": 20, "hp": 140, "attack": 14},
         {"name": "Roadent", "stamina": 10, "hp": 230, "attack": 30},
         {"name": "Rocker", "stamina": 30, "hp": 200, "attack": 20},
@@ -92,10 +109,9 @@ print("It's a wild {} It has {} hp.".format(opponent["name"], opponent["hp"]))
 print("You call in your Pokétmon {} to battle against the wild {}!\n".format(player_poketmon["name"], opponent["name"]))
 
 # Battle loop: player and opponent take turns attacking, using stamina
-print("Press [space] to attack, or type 'run' to run away.")
 while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
         print("What do you want to do? (attack/run)")
-        print("Press [space] to attack, or type 'run' and press [L] to run away.")
+        print("Press [space] to attack, or type [L] to run away.")
         action = msvcrt.getwch()
         if action == ' ':
                 # Check if player has stamina
@@ -135,14 +151,14 @@ print("")
 # End of battle: print outcome based on who fainted or if player ran
 if opponent["hp"] <= 0:
         print(f"The wild {opponent['name']} fainted. {player_poketmon['name']} held its ground like a champ.")
-        print("You give it a pat on it's head. No big speeches—just respect.")
-        print("You turn around, brush the dirt off your Poketmon, and start heading back through the forest.")
+        print(f"You give your {player_poketmon['name']} a pat on it's head, and capture the wild {opponent['name']}.")
+        print("Then you head out of the forest with your new Pokétmon.")
         print("That's it for now.")
         print("GAME OVER")
 
 elif player_poketmon["hp"] <= 0:
         print(f"{player_poketmon['name']} hits the ground. The wild {opponent['name']} disappears into the trees.")
-        print("You recall your Pokétmon silently and walk out of the forest, not feeling defeated, just... done.")
+        print("You recall your Pokétmon and walk out of the forest, not feeling defeated, just... done.")
         print("You win some, lose some.")
         print("GAME OVER")
 
