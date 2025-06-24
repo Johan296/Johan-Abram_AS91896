@@ -155,12 +155,12 @@ def game():
                                     opponent["stamina"] -= 10
                                     print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}. {opponent['name']}'s stamina is now {opponent['stamina']}.\n")
                                     if player_poketmon["hp"] <= 0:
-                                            print("You fainted... better luck next time! 💫")
+                                            print("You fainted.. better luck next time!💫")
                                             break
                             else:
                                     print(f"{opponent['name']} is out of stamina and must recharge!")
                                     opponent["stamina"] += 20
-                                    print(f"{opponent['name']} is recharging... Stamina is now {opponent['stamina']}.\n")
+                                    print(f"{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\n")
             elif action == 'l':
                     print("You ran away safely.")
                     break
