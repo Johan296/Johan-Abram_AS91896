@@ -4,13 +4,13 @@ import msvcrt
 def game():
 
     # Prints welcome message
-    print(""" 
+    print("""\033[93m
   ____       _        _                         
  |  _ \ ___ | | _____| |_ _ __ ___   ___  _ __  
  | |_) / _ \| |/ / _ \ __| '_ ` _ \ / _ \| '_ \ 
  |  __/ (_) |   <  __/ |_| | | | | | (_) | | | |
  |_|   \___/|_|\_\___|\__|_| |_| |_|\___/|_| |_|                                             
-""")
+\033[0m""")
 
     # Introduction and trainer name input
     print("Welcome to Pokétmon Adventure!")
@@ -22,19 +22,21 @@ def game():
     # First decision: go to the lab or not
     choice = input("\nDo you go to the lab? (yes/no): ").lower()
     while choice not in ["yes", "no"]:
-            print("Invalid choice, Please enter 'yes' or 'no'")
-            choice = input("\nDo you go to the lab? (yes/no): ").lower()
+        print("Invalid choice, Please enter 'yes' or 'no'")
+        choice = input("\nDo you go to the lab? (yes/no): ").lower()
     if choice == "yes":
-            print("\nYou head to Professor Clark's lab with excitement!.")
+        print("\033[92mYou chose YES.\033[0m") 
+        print("\nYou head to Professor Clark's lab with excitement!.")
     elif choice == "no":
-            print("You decide to stay home and play video games instead. Maybe another time!")
-            while True:
-                again = input("\nDo you want to play again? (yes/no): ").lower()
-                if again not in ["yes", "y"]:
-                        print("Thanks for playing! Goodbye!")
-                        exit()
-                        break
-                game()
+        print("\033[91mYou chose NO.\033[0m")   
+        print("You decide to stay home and play video games instead. Maybe another time!")
+        while True:
+            again = input("\nDo you want to play again? (yes/no): ").lower()
+            if again not in ["yes", "y"]:
+                print("Thanks for playing! Goodbye!")
+                exit()
+                break
+            game()
 
     # Arriving at the lab and being told about limited choices
     print("But you arrive at Professor's lab a bit late. So there aren't many Pokétmons to choose from.")
@@ -46,8 +48,10 @@ def game():
             print("Invalid choice, Please enter 'yes' or 'no'")
             choose = input("\nHe asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
     if choose == "yes":
+            print("\033[92mYou chose YES.\033[0m") 
             print("Professor Clark shows you the remaining Pokétmons available for you to choose from.\n")
     elif choose == "no":
+            print("\033[91mYou chose NO.\033[0m")
             print("You decide to leave the lab and go home. Maybe you'll come back later.")
             while True:
                 again = input("\nDo you want to play again? (yes/no): ").lower()
@@ -72,16 +76,16 @@ def game():
 
     # Assigned Pokétmon stats based on choice
     if choose_poketmon == "a":
-            print("That's a great choice, Nimbolts are very friendly!")
+            print("\033[93mThat's a great choice, Nimbolts are very friendly!\033[0m") 
             player_poketmon = {"name": "Nimbolt", "stamina": 50, "hp": 210, "attack": 20}
     elif choose_poketmon == "b":
-            print("Solid choice! Hydrozoa is always cool under pressure!")
+            print("\033[94mSolid choice! Hydrozoa is always cool under pressure!\033[0m")
             player_poketmon = {"name": "Hydrozoa", "stamina": 50, "hp": 220, "attack": 22}
     elif choose_poketmon == "c":
-            print("Strong choice!")
+            print("\033[96mIvyrex is a Strong choice!\033[0m")
             player_poketmon = {"name": "Ivyrex", "stamina": 60, "hp": 230, "attack": 21}
     elif choose_poketmon == "d":
-            print("Hmm Hollowby, scary choice!")
+            print("\033[95mHmm Hollowby, scary choice!\033[0m")
             player_poketmon = {"name": "Hollowby", "stamina": 50, "hp": 205, "attack": 25}
     print("")
 
@@ -96,7 +100,7 @@ def game():
     choose = input("\nEnter 'f' for forest or 'h' for house: ").lower()
     while choose not in ["f", "h"]:
             print("Invalid choice, Please enter 'f' for forest or 'h' for house")
-            choose = input("\nEnter 'f' for forest or 'h' for house").lower()
+            choose = input("\nEnter 'f' for forest or 'h' for house: ").lower()
     if choose == "f":     
         print("You are now in the Creek Forest, the most bizzare forest which is filled with a lot of wild and rare Pokétmons.")
         print("You head deep into the forest where you encounter a Pokétmon!\n")
