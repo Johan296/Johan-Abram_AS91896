@@ -33,7 +33,7 @@ def game():
         while True:
             again = input("\nDo you want to play again? (yes/no): ").lower()
             if again not in ["yes", "y"]:
-                print("Thanks for playing! Goodbye!")
+                print("\033[93mThanks for playing! Goodbye!\033[0m")
                 exit()
                 break
             game()
@@ -56,7 +56,7 @@ def game():
             while True:
                 again = input("\nDo you want to play again? (yes/no): ").lower()
                 if again not in ["yes", "y"]:
-                        print("Thanks for playing! Try later!")
+                        print("\033[93mThanks for playing! Goodbye!\033[0m")
                         exit()
                         break
                 game()
@@ -65,8 +65,8 @@ def game():
     print("Here are the available Pokétmons, choose them wisely, as each Pokétmons has its strengths and weaknesses!")
     print("\033[93ma) Nimbolt:   stamina: 50 | hp: 210 | attack: 20 |\033[0m")
     print("\033[94mb) Hydrozoa:  stamina: 50 | hp: 220 | attack: 22 |\033[0m")
-    print("\033[96mc) Ivyrex:    stamina: 60 | hp: 230 | attack: 21 |\033[0m")
-    print("d) Hollowby:  stamina: 50 | hp: 205 | attack: 25 |")
+    print("\033[92mc) Ivyrex:    stamina: 60 | hp: 230 | attack: 21 |\033[0m")
+    print("\033[95md) Hollowby:  stamina: 50 | hp: 205 | attack: 25 |\033[0m")
 
     # Player chooses their Pokétmon
     choose_poketmon = input("\nPlease choose your Pokétmon (Enter: a,b,c,d): ").lower()
@@ -82,7 +82,7 @@ def game():
             print("\033[94mSolid choice! Hydrozoa is always cool under pressure!\033[0m")
             player_poketmon = {"name": "Hydrozoa", "stamina": 50, "hp": 220, "attack": 22}
     elif choose_poketmon == "c":
-            print("\033[96mIvyrex is a Strong choice!\033[0m")
+            print("\033[92mIvyrex is a Strong choice!\033[0m")
             player_poketmon = {"name": "Ivyrex", "stamina": 60, "hp": 230, "attack": 21}
     elif choose_poketmon == "d":
             print("\033[95mHmm Hollowby, scary choice!\033[0m")
@@ -97,20 +97,22 @@ def game():
     print("You are offered two choices now, either go to the Creek Forest for a exciting adventure or go back home with your new Pokétmon.")
 
     # Third decision: choose between forest or home
-    choose = input("\nEnter 'f' for forest or 'h' for house: ").lower()
+    choose = input("\nEnter 'f' for forest or 'h' for home: ").lower()
     while choose not in ["f", "h"]:
-            print("Invalid choice, Please enter 'f' for forest or 'h' for house")
-            choose = input("\nEnter 'f' for forest or 'h' for house: ").lower()
-    if choose == "f":     
+            print("Invalid choice, Please enter 'f' for forest or 'h' for home")
+            choose = input("\nEnter 'f' for forest or 'h' for home: ").lower()
+    if choose == "f":
+        print("\033[92mYou chose Forest.\033[0m")     
         print("You are now in the Creek Forest, the most bizzare forest which is filled with a lot of wild and rare Pokétmons.")
         print("You head deep into the forest where you encounter a Pokétmon!\n")
     elif choose == "h":
+            print("\033[91mYou chose Home.\033[0m")
             print("You decide to go back home with your new Pokétmon. You play with it and train for a while.")
             print("Not ready for an adventure yet. Maybe next time")
             while True:
              again = input("\nDo you want to play again? (yes/no): ").lower()
              if again not in ["yes", "y"]:
-                print("Thanks for playing! Goodbye!")
+                print("\033[93mThanks for playing! Goodbye!\033[0m")
                 exit()
                 break
             game()
@@ -129,8 +131,8 @@ def game():
             {"name": "Penop", "stamina": 50, "hp": 160, "attack": 21},
             {"name": "Froggit", "stamina": 30, "hp": 180, "attack": 18},
             {"name": "Sparky", "stamina": 40, "hp": 200, "attack": 20},
-            {"name": "Flameo", "stamina": 50, "hp": 210, "attack": 22},
-            {"name": "Leafy", "stamina": 50, "hp": 220, "attack": 23},
+            {"name": "Flameo", "stamina": 50, "hp": 200, "attack": 22},
+            {"name": "Leafy", "stamina": 50, "hp": 200, "attack": 23},
             {"name": "Cigron", "stamina": 120, "hp": 890, "attack": 180}
     ]
 
@@ -185,23 +187,23 @@ def game():
             print(f"You give your {player_poketmon['name']} a pat on it's head, and capture the wild {opponent['name']}.")
             print("Then you head out of the forest with your new Pokétmon.")
             print("That's it for now.")
-            print("GAME OVER")
+            print("\033[92mGAME OVER\033[0m")
 
     elif player_poketmon["hp"] <= 0:
             print(f"{player_poketmon['name']} hits the ground. The wild {opponent['name']} disappears into the trees.")
             print("You recall your Pokétmon and walk out of the forest, not feeling defeated, just... done.")
             print("You win some, lose some.")
-            print("GAME OVER")
+            print("\033[91mGAME OVER\033[0m")
 
     else:
             print("You dip out of the battle and leave the forest behind.")
             print("Not in the mood today. Fair enough.")
             print("Maybe next time.")
-            print("GAME OVER")
+            print("\033[91mGAME OVER\033[0m")
             while True:
              again = input("\nDo you want to play again? (yes/no): ").lower()
              if again not in ["yes", "y"]:
-                print("Thanks for playing! Goodbye!")
+                print("\033[93mThanks for playing! Goodbye!\033[0m")
                 exit()
                 break
 game()
