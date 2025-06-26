@@ -63,9 +63,9 @@ def game():
 
     # Show available Pokétmon choices
     print("Here are the available Pokétmons, choose them wisely, as each Pokétmons has its strengths and weaknesses!")
-    print("a) Nimbolt:   stamina: 50 | hp: 210 | attack: 20 |")
-    print("b) Hydrozoa:  stamina: 50 | hp: 220 | attack: 22 |")
-    print("c) Ivyrex:    stamina: 60 | hp: 230 | attack: 21 |")
+    print("\033[93ma) Nimbolt:   stamina: 50 | hp: 210 | attack: 20 |\033[0m")
+    print("\033[94mb) Hydrozoa:  stamina: 50 | hp: 220 | attack: 22 |\033[0m")
+    print("\033[96mc) Ivyrex:    stamina: 60 | hp: 230 | attack: 21 |\033[0m")
     print("d) Hollowby:  stamina: 50 | hp: 205 | attack: 25 |")
 
     # Player chooses their Pokétmon
@@ -107,7 +107,14 @@ def game():
     elif choose == "h":
             print("You decide to go back home with your new Pokétmon. You play with it and train for a while.")
             print("Not ready for an adventure yet. Maybe next time")
-            exit()
+            while True:
+             again = input("\nDo you want to play again? (yes/no): ").lower()
+             if again not in ["yes", "y"]:
+                print("Thanks for playing! Goodbye!")
+                exit()
+                break
+            game()
+            
 
     # List of random wild opponent Pokétmon
     opponents = [
@@ -191,5 +198,10 @@ def game():
             print("Not in the mood today. Fair enough.")
             print("Maybe next time.")
             print("GAME OVER")
-
+            while True:
+             again = input("\nDo you want to play again? (yes/no): ").lower()
+             if again not in ["yes", "y"]:
+                print("Thanks for playing! Goodbye!")
+                exit()
+                break
 game()
