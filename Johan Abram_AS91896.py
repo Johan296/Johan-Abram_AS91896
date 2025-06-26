@@ -14,16 +14,16 @@ def game():
 
     # Introduction and trainer name input
     print("Welcome to Pokétmon Adventure!")
-    trainer_name = input("To start please enter your trainer name: ")
+    trainer_name = input("\033[1;97mTo start please enter your trainer name: \033[0m")
     print(f"\nWelcome, trainer {trainer_name}! Let's start your Pokétmon adventure!")
     print("You wake up in Paimon Town, where you have always dreamed of becoming a Pokétmon Trainer.")
     print("You get a call from Professor Clark, who tells you to come to his lab.")
 
     # First decision: go to the lab or not
-    choice = input("\nDo you go to the lab? (yes/no): ").lower()
+    choice = input("\n\033[1;97mDo you go to the lab? (yes/no): \033[0m").lower()
     while choice not in ["yes", "no"]:
         print("Invalid choice, Please enter 'yes' or 'no'")
-        choice = input("\nDo you go to the lab? (yes/no): ").lower()
+        choice = input("\n\033[1;97mDo you go to the lab? (yes/no): \033[0m").lower()
     if choice == "yes":
         print("\033[92mYou chose YES.\033[0m") 
         print("\nYou head to Professor Clark's lab with excitement!.")
@@ -31,7 +31,7 @@ def game():
         print("\033[91mYou chose NO.\033[0m")   
         print("You decide to stay home and play video games instead. Maybe another time!")
         while True:
-            again = input("\nDo you want to play again? (yes/no): ").lower()
+            again = input("\n\033[1;91mDo you want to play again? (yes/no): \033[0m").lower()
             if again not in ["yes", "y"]:
                 print("\033[93mThanks for playing! Goodbye!\033[0m")
                 exit()
@@ -43,23 +43,23 @@ def game():
     print("So you are a bit sad, but Professor Clark assures you that there are still some great Pokétmons left for you to choose from.")
 
     # Second decision: Choose a Pokétmon or not
-    choose = input("\nHe asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
+    choose = input("\n\033[1;97mHe asks if you are you ready to choose your first Pokétmon? (yes/no): \033[0m").lower()
     while choose not in ["yes", "no"]:
-            print("Invalid choice, Please enter 'yes' or 'no'")
-            choose = input("\nHe asks if you are you ready to choose your first Pokétmon? (yes/no): ").lower()
+        print("Invalid choice, Please enter 'yes' or 'no'")
+        choose = input("\n\033[1;97mHe asks if you are you ready to choose your first Pokétmon? (yes/no): \033[0m").lower()
     if choose == "yes":
-            print("\033[92mYou chose YES.\033[0m") 
-            print("Professor Clark shows you the remaining Pokétmons available for you to choose from.\n")
+        print("\033[92mYou chose YES.\033[0m") 
+        print("Professor Clark shows you the remaining Pokétmons available for you to choose from.\n")
     elif choose == "no":
-            print("\033[91mYou chose NO.\033[0m")
-            print("You decide to leave the lab and go home. Maybe you'll come back later.")
-            while True:
-                again = input("\nDo you want to play again? (yes/no): ").lower()
-                if again not in ["yes", "y"]:
-                        print("\033[93mThanks for playing! Goodbye!\033[0m")
-                        exit()
-                        break
-                game()
+        print("\033[91mYou chose NO.\033[0m")
+        print("You decide to leave the lab and go home. Maybe you'll come back later.")
+        while True:
+            again = input("\n\033[1;91mDo you want to play again? (yes/no): \033[0m").lower()
+            if again not in ["yes", "y"]:
+                print("\033[93mThanks for playing! Goodbye!\033[0m")
+                exit()
+                break
+            game()
 
     # Show available Pokétmon choices
     print("Here are the available Pokétmons, choose them wisely, as each Pokétmons has its strengths and weaknesses!")
@@ -69,10 +69,10 @@ def game():
     print("\033[95md) Hollowby:  stamina: 50 | hp: 205 | attack: 25 |\033[0m")
 
     # Player chooses their Pokétmon
-    choose_poketmon = input("\nPlease choose your Pokétmon (Enter: a,b,c,d): ").lower()
+    choose_poketmon = input("\n\033[1;97mPlease choose your Pokétmon (Enter: a,b,c,d): \033[0m").lower()
     while choose_poketmon not in ["a", "b", "c", "d"]:
             print("Invalid choice! Please choose a valid Pokétmon.")
-            choose_poketmon = input("\nPlease choose your Pokétmon (Enter: a,b,c,d): ").lower()
+            choose_poketmon = input("\n\033[1;97mPlease choose your Pokétmon (Enter: a,b,c,d): \033[0m").lower()
 
     # Assigned Pokétmon stats based on choice
     if choose_poketmon == "a":
@@ -97,25 +97,25 @@ def game():
     print("You are offered two choices now, either go to the Creek Forest for a exciting adventure or go back home with your new Pokétmon.")
 
     # Third decision: choose between forest or home
-    choose = input("\nEnter 'f' for forest or 'h' for home: ").lower()
+    choose = input("\n\033[1;97mEnter 'f' for Forest or 'h' for Home: \033[0m").lower()
     while choose not in ["f", "h"]:
             print("Invalid choice, Please enter 'f' for forest or 'h' for home")
-            choose = input("\nEnter 'f' for forest or 'h' for home: ").lower()
+            choose = input("\n\033[1;97mEnter 'f' for forest or 'h' for home: \033[0m").lower()
     if choose == "f":
         print("\033[92mYou chose Forest.\033[0m")     
         print("You are now in the Creek Forest, the most bizzare forest which is filled with a lot of wild and rare Pokétmons.")
         print("You head deep into the forest where you encounter a Pokétmon!\n")
     elif choose == "h":
-            print("\033[91mYou chose Home.\033[0m")
-            print("You decide to go back home with your new Pokétmon. You play with it and train for a while.")
-            print("Not ready for an adventure yet. Maybe next time")
-            while True:
-             again = input("\nDo you want to play again? (yes/no): ").lower()
+        print("\033[91mYou chose Home.\033[0m")
+        print("You decide to go back home with your new Pokétmon. You play with it and train for a while.")
+        print("Not ready for an adventure yet. Maybe next time")
+        while True:
+             again = input("\n\033[1;91mDo you want to play again? (yes/no): \033[0m").lower()
              if again not in ["yes", "y"]:
-                print("\033[93mThanks for playing! Goodbye!\033[0m")
-                exit()
-                break
-            game()
+                 print("\033[93mThanks for playing! Goodbye!\033[0m")
+                 exit()
+                 break
+             game()
             
 
     # List of random wild opponent Pokétmon
@@ -143,7 +143,7 @@ def game():
 
     # Battle loop: player and opponent take turns attacking, using stamina
     while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
-            print("What do you want to do? (attack/run)")
+            print("\033[1;97mWhat do you want to do? (attack/run)\033[0m")
             print("Press [space] to attack, or type [L] to run away.")
             action = msvcrt.getwch()
             if action == ' ':
@@ -153,12 +153,12 @@ def game():
                             player_poketmon["stamina"] -= 10  # Use stamina per attack
                             print(f"You attacked {opponent['name']}! Its HP is now {opponent['hp']}. Your stamina is now {player_poketmon['stamina']}.")
                             if opponent["hp"] <= 0:
-                                    print("You won the battle!🎉")
+                                    print("\033[1;92mYou won the battle!🎉\033[0m")
                                     break
                     else:
                             print("You're out of stamina! You must recharge this turn.")
                             player_poketmon["stamina"] += 20  # Recharge stamina
-                            print(f"{player_poketmon['name']} is recharging... Stamina is now {player_poketmon['stamina']}.")
+                            print(f"\033[93m{player_poketmon['name']} is recharging... Stamina is now {player_poketmon['stamina']}.\033[0m")
                             # Skip attack this turn
 
                     # Opponent's turn
@@ -168,19 +168,20 @@ def game():
                                     opponent["stamina"] -= 10
                                     print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}. {opponent['name']}'s stamina is now {opponent['stamina']}.\n")
                                     if player_poketmon["hp"] <= 0:
-                                            print("You fainted.. better luck next time!💫")
+                                            print("\033[38;5;52mYou fainted.. better luck next time!💫\033[0m")
                                             break
                             else:
                                     print(f"{opponent['name']} is out of stamina and must recharge!")
                                     opponent["stamina"] += 20
-                                    print(f"{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\n")
+                                    print(f"\033[93m{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\033[0m")
             elif action == 'l':
                     print("You ran away safely.")
                     break
             else:
-                    print("Please choose a valid action.")
+                    print("Please choose a valid action.\n")
 
     print("")
+    
     # End of battle: print outcome based on who fainted or if player ran
     if opponent["hp"] <= 0:
             print(f"The wild {opponent['name']} fainted. {player_poketmon['name']} held its ground like a champ.")
@@ -200,10 +201,4 @@ def game():
             print("Not in the mood today. Fair enough.")
             print("Maybe next time.")
             print("\033[91mGAME OVER\033[0m")
-            while True:
-             again = input("\nDo you want to play again? (yes/no): ").lower()
-             if again not in ["yes", "y"]:
-                print("\033[93mThanks for playing! Goodbye!\033[0m")
-                exit()
-                break
 game()
