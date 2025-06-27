@@ -63,9 +63,9 @@ def game():
 
     # Show available Pokétmon choices
     print("Here are the available Pokétmons, choose them wisely, as each Pokétmons has its strengths and weaknesses!")
-    print("\033[93ma) Nimbolt:   stamina: 50 | hp: 210 | attack: 20 |\033[0m")
-    print("\033[94mb) Hydrozoa:  stamina: 50 | hp: 220 | attack: 22 |\033[0m")
-    print("\033[92mc) Ivyrex:    stamina: 60 | hp: 230 | attack: 21 |\033[0m")
+    print("\033[93ma) Nimbolt:   stamina: 50 | hp: 210 | attack: 22 |\033[0m")
+    print("\033[94mb) Hydrozoa:  stamina: 50 | hp: 220 | attack: 25 |\033[0m")
+    print("\033[92mc) Ivyrex:    stamina: 60 | hp: 230 | attack: 23 |\033[0m")
     print("\033[95md) Hollowby:  stamina: 50 | hp: 205 | attack: 25 |\033[0m")
 
     # Player chooses their Pokétmon
@@ -77,13 +77,13 @@ def game():
     # Assigned Pokétmon stats based on choice
     if choose_poketmon == "a":
             print("\033[93mThat's a great choice, Nimbolts are very friendly!\033[0m") 
-            player_poketmon = {"name": "Nimbolt", "stamina": 50, "hp": 210, "attack": 20}
+            player_poketmon = {"name": "Nimbolt", "stamina": 50, "hp": 210, "attack": 22}
     elif choose_poketmon == "b":
             print("\033[94mSolid choice! Hydrozoa is always cool under pressure!\033[0m")
-            player_poketmon = {"name": "Hydrozoa", "stamina": 50, "hp": 220, "attack": 22}
+            player_poketmon = {"name": "Hydrozoa", "stamina": 50, "hp": 220, "attack": 25}
     elif choose_poketmon == "c":
             print("\033[92mIvyrex is a Strong choice!\033[0m")
-            player_poketmon = {"name": "Ivyrex", "stamina": 60, "hp": 230, "attack": 21}
+            player_poketmon = {"name": "Ivyrex", "stamina": 60, "hp": 230, "attack": 23}
     elif choose_poketmon == "d":
             print("\033[95mHmm Hollowby, scary choice!\033[0m")
             player_poketmon = {"name": "Hollowby", "stamina": 50, "hp": 205, "attack": 25}
@@ -120,17 +120,17 @@ def game():
 
     # List of random wild opponent Pokétmon
     opponents = [
-            {"name": "Pigot", "stamina": 40, "hp": 160, "attack": 16},
-            {"name": "Pyroot", "stamina": 30, "hp": 180, "attack": 18},
+            {"name": "Pigot", "stamina": 50, "hp": 160, "attack": 16},
+            {"name": "Pyroot", "stamina": 50, "hp": 180, "attack": 18},
             {"name": "Mewloo", "stamina": 50, "hp": 220, "attack": 20},
-            {"name": "Moonpuffs", "stamina": 20, "hp": 140, "attack": 14},
-            {"name": "Roadent", "stamina": 10, "hp": 230, "attack": 30},
-            {"name": "Rocker", "stamina": 30, "hp": 200, "attack": 20},
+            {"name": "Moonpuffs", "stamina": 50, "hp": 140, "attack": 14},
+            {"name": "Roadent", "stamina": 40, "hp": 230, "attack": 30},
+            {"name": "Rocker", "stamina": 50, "hp": 200, "attack": 20},
             {"name": "Fluffin", "stamina": 50, "hp": 190, "attack": 19},
-            {"name": "Buzzy", "stamina": 40, "hp": 170, "attack": 17},
+            {"name": "Buzzy", "stamina": 50, "hp": 170, "attack": 17},
             {"name": "Penop", "stamina": 50, "hp": 160, "attack": 21},
-            {"name": "Froggit", "stamina": 30, "hp": 180, "attack": 18},
-            {"name": "Sparky", "stamina": 40, "hp": 200, "attack": 20},
+            {"name": "Froggit", "stamina": 50, "hp": 180, "attack": 18},
+            {"name": "Sparky", "stamina": 50, "hp": 200, "attack": 20},
             {"name": "Flameo", "stamina": 50, "hp": 200, "attack": 22},
             {"name": "Leafy", "stamina": 50, "hp": 200, "attack": 23},
             {"name": "Cigron", "stamina": 120, "hp": 890, "attack": 180}
@@ -144,7 +144,7 @@ def game():
     # Battle loop: player and opponent take turns attacking, using stamina
     while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
             print("\033[1;97mWhat do you want to do? (attack/run)\033[0m")
-            print("Press [space] to attack, or type [L] to run away.")
+            print("Press [space] to attack, press [X] for ultimate move or type [L] to run away.")
             action = msvcrt.getwch()
             if action == ' ':
                     # Check if player has stamina
@@ -155,6 +155,14 @@ def game():
                             if opponent["hp"] <= 0:
                                     print("\033[1;92mYou won the battle!🎉\033[0m")
                                     break
+                            
+                     # Check if player wants to use ultimate move
+            elif action == 'x':
+            # Ultimate move, requires full stamina
+                    if player_poketmon["stamina"] >= 50:
+                     opponent["hp"] -= player_poketmon["attack"] * 2
+                     print(f"\033[1;93m{player_poketmon['name']} unleashed its ultimate move on {opponent['name']}! Its HP is now {opponent['hp']}.\033[0m")        
+                    
                     else:
                             print("You're out of stamina! You must recharge this turn.")
                             player_poketmon["stamina"] += 20  # Recharge stamina
@@ -170,10 +178,17 @@ def game():
                                     if player_poketmon["hp"] <= 0:
                                             print("\033[38;5;52mYou fainted.. better luck next time!💫\033[0m")
                                             break
-                            else:
-                                    print(f"{opponent['name']} is out of stamina and must recharge!")
-                                    opponent["stamina"] += 20
-                                    print(f"\033[93m{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\033[0m")
+            elif action == 'x':
+            # Ultimate move, requires full stamina
+                    if player_poketmon["stamina"] >= 50:
+                     opponent["hp"] -= player_poketmon["attack"] * 2
+                     print(f"\033[1;93m{opponent['name']} unleashed its ultimate move on {player_poketmon['name']}! Its HP is now {player_poketmon['hp']}.\033[0m")    
+
+                    else:
+                           print(f"{opponent['name']} is out of stamina and must recharge!")
+                           opponent["stamina"] += 20
+                           print(f"\033[93m{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\033[0m\n")
+            
             elif action == 'l':
                     print("You ran away safely.")
                     break
@@ -189,16 +204,37 @@ def game():
             print("Then you head out of the forest with your new Pokétmon.")
             print("That's it for now.")
             print("\033[92mGAME OVER\033[0m")
+            while True:
+             again = input("\n\033[1;91mDo you want to play again? (yes/no): \033[0m").lower()
+             if again not in ["yes", "y"]:
+                 print("\033[93mThanks for playing! Goodbye!\033[0m")
+                 exit()
+                 break
+             game()
+
 
     elif player_poketmon["hp"] <= 0:
             print(f"{player_poketmon['name']} hits the ground. The wild {opponent['name']} disappears into the trees.")
             print("You recall your Pokétmon and walk out of the forest, not feeling defeated, just... done.")
             print("You win some, lose some.")
             print("\033[91mGAME OVER\033[0m")
-
-    else:
+            while True:
+             again = input("\n\033[1;91mDo you want to play again? (yes/no): \033[0m").lower()
+             if again not in ["yes", "y"]:
+                 print("\033[93mThanks for playing! Goodbye!\033[0m")
+                 exit()
+                 break
+             game()
+    else: 
             print("You dip out of the battle and leave the forest behind.")
             print("Not in the mood today. Fair enough.")
             print("Maybe next time.")
             print("\033[91mGAME OVER\033[0m")
+            while True:
+             again = input("\n\033[1;91mDo you want to play again? (yes/no): \033[0m").lower()
+             if again not in ["yes", "y"]:
+                 print("\033[93mThanks for playing! Goodbye!\033[0m")
+                 exit()
+                 break
+             game()
 game()
