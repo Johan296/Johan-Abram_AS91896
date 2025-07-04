@@ -94,7 +94,7 @@ def game():
     print("Congratulations on choosing your first Pokétmon!")
     print("")
     print("You head out of the lab with your new Poketmon and enter the Creek Forest, where you start your first adventure.")
-    print("You are offered two choices now, either go to the Creek Forest for a exciting adventure or go back home with your new Pokétmon.")
+    print("You are offered two choices now, either go to the Creek Forest for an exciting adventure or go back home with your new Pokétmon.")
 
     # Third decision: choose between forest or home
     choose = input("\n\033[1;97mEnter 'f' for Forest or 'h' for Home: \033[0m").lower()
@@ -142,11 +142,11 @@ def game():
     print("You call in your Pokétmon {} to battle against the wild {}!\n".format(player_poketmon["name"], opponent["name"]))
 
     recharge_count = 0
-    max_recharges = 2   
+    max_recharges = 3  # Maximum number of recharges allowed in a battle   
     # Battle loop: player and opponent take turns attacking, using stamina
     while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
-        print("\033[1;97mWhat do you want to do? (attack/run)\033[0m")
-        print("Press [space] to attack, press [X] for ultimate move, press [R] to recharge or type [L] to run away.")
+        print("\033[1;97mWhat do you want to do?\033[0m")
+        print("\033[1;97mChoose action: [space] = Attack | X = Ultimate | R = Recharge | L = Run\033[0m")
         action = msvcrt.getwch()
         player_acted = False
         if action == ' ':
@@ -225,7 +225,7 @@ def game():
     # End of battle: print outcome based on who fainted or if player ran
     if opponent["hp"] <= 0:
             print(f"The wild {opponent['name']} fainted. {player_poketmon['name']} held its ground like a champ.")
-            print(f"You give your {player_poketmon['name']} a pat on it's head, and capture the wild {opponent['name']}.")
+            print(f"You give your {player_poketmon['name']} a pat on its head, and capture the wild {opponent['name']}.")
             print("Then you head out of the forest with your new Pokétmon.")
             print("That's it for now.")
             print("\033[92mGAME OVER\033[0m")
@@ -236,7 +236,6 @@ def game():
                  exit()
                  break
              game()
-
 
     elif player_poketmon["hp"] <= 0:
             print(f"{player_poketmon['name']} hits the ground. The wild {opponent['name']} disappears into the trees.")
