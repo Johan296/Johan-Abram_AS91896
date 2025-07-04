@@ -93,7 +93,7 @@ def game():
     print(f"Trainer {trainer_name} has chosen {player_poketmon['name']} which has {player_poketmon['stamina']} stamina and {player_poketmon['hp']} hp.")
     print("Congratulations on choosing your first Pokétmon!")
     print("")
-    print("You head out of the lab with your new Poketmon")
+    print("You head out of the lab with your new Poketmon and enter the Creek Forest, where you start your first adventure.")
     print("You are offered two choices now, either go to the Creek Forest for a exciting adventure or go back home with your new Pokétmon.")
 
     # Third decision: choose between forest or home
@@ -133,7 +133,7 @@ def game():
             {"name": "Sparky", "stamina": 50, "hp": 200, "attack": 20},
             {"name": "Flameo", "stamina": 50, "hp": 200, "attack": 22},
             {"name": "Leafy", "stamina": 50, "hp": 200, "attack": 23},
-            {"name": "Cigron", "stamina": 120, "hp": 890, "attack": 180}
+            {"name": "Cigron", "stamina": 100, "hp": 800, "attack": 100}
     ]
 
     # Randomly spawns an opponent
@@ -143,57 +143,68 @@ def game():
 
     # Battle loop: player and opponent take turns attacking, using stamina
     while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
-            print("\033[1;97mWhat do you want to do? (attack/run)\033[0m")
-            print("Press [space] to attack, press [X] for ultimate move or type [L] to run away.")
-            action = msvcrt.getwch()
-            if action == ' ':
-                    # Check if player has stamina
-                    if player_poketmon["stamina"] > 0:
-                            opponent["hp"] -= player_poketmon["attack"]
-                            player_poketmon["stamina"] -= 10  # Use stamina per attack
-                            print(f"You attacked {opponent['name']}! Its HP is now {opponent['hp']}. Your stamina is now {player_poketmon['stamina']}.")
-                            if opponent["hp"] <= 0:
-                                    print("\033[1;92mYou won the battle!🎉\033[0m")
-                                    break
-                            
-                     # Check if player wants to use ultimate move
-            elif action == 'x':
-            # Ultimate move, requires full stamina
-                    if player_poketmon["stamina"] >= 50:
-                     opponent["hp"] -= player_poketmon["attack"] * 2
-                     print(f"\033[1;93m{player_poketmon['name']} unleashed its ultimate move on {opponent['name']}! Its HP is now {opponent['hp']}.\033[0m")        
-                    
-                    else:
-                            print("You're out of stamina! You must recharge this turn.")
-                            player_poketmon["stamina"] += 20  # Recharge stamina
-                            print(f"\033[93m{player_poketmon['name']} is recharging... Stamina is now {player_poketmon['stamina']}.\033[0m")
-                            # Skip attack this turn
+        print("\033[1;97mWhat do you want to do? (attack/run)\033[0m")
+        print("Press [space] to attack, press [X] for ultimate move or type [L] to run away.")
+        action = msvcrt.getwch()
+        player_acted = False
+        if action == ' ':
+            # Check if player has stamina
+            if player_poketmon["stamina"] > 0:
+                opponent["hp"] -= player_poketmon["attack"]
+                player_poketmon["stamina"] -= 10  # Use stamina per attack
+                print(f"You attacked {opponent['name']}! Its HP is now {opponent['hp']}. Your stamina is now {player_poketmon['stamina']}.")
+                player_acted = True
+                if opponent["hp"] <= 0:
+                    print("\033[1;92mYou won the battle!🎉\033[0m")
+                    break                    
+            else:
+                print("You're out of stamina! You must recharge this turn.")
+                player_poketmon["stamina"] += 20  # Recharge stamina
+                print(f"\033[93m{player_poketmon['name']} is recharging... Stamina is now {player_poketmon['stamina']}.\033[0m")
+                # Skip attack this turn
+                player_acted = True
 
-                    # Opponent's turn
-                    if opponent["hp"] > 0:
-                            if opponent["stamina"] > 0:
-                                    player_poketmon["hp"] -= opponent["attack"]
-                                    opponent["stamina"] -= 10
-                                    print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}. {opponent['name']}'s stamina is now {opponent['stamina']}.\n")
-                                    if player_poketmon["hp"] <= 0:
-                                            print("\033[38;5;52mYou fainted.. better luck next time!💫\033[0m")
-                                            break
-            elif action == 'x':
+        elif action == 'x':
             # Ultimate move, requires full stamina
-                    if player_poketmon["stamina"] >= 50:
-                     opponent["hp"] -= player_poketmon["attack"] * 2
-                     print(f"\033[1;93m{opponent['name']} unleashed its ultimate move on {player_poketmon['name']}! Its HP is now {player_poketmon['hp']}.\033[0m")    
-
-                    else:
-                           print(f"{opponent['name']} is out of stamina and must recharge!")
-                           opponent["stamina"] += 20
-                           print(f"\033[93m{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\033[0m\n")
-            
-            elif action == 'l':
-                    print("You ran away safely.")
+            if player_poketmon["stamina"] >= 50:
+                opponent["hp"] -= player_poketmon["attack"] * 2 # Ultimate move does 2.5x damage
+                player_poketmon["stamina"] -= 50
+                print(f"\033[1;93m{player_poketmon['name']} unleashed its ultimate move on {opponent['name']}! Its HP is now {opponent['hp']}.\033[0m\n")
+                player_acted = True
+                if opponent["hp"] <= 0:
+                    print("\033[1;92mYou won the battle!🎉\033[0m")
                     break
             else:
-                    print("Please choose a valid action.\n")
+                print(f"\033[91mNot enough stamina for ultimate move! You need at least 50 stamina.\033[0m\n")
+                player_acted = True        
+
+        elif action == 'l':
+            print("You ran away safely.")
+            break
+        else:
+            print("Please choose a valid action.\n")
+            continue  # Skip opponent's turn if invalid input
+
+        # Opponent's turn (only if player acted and opponent is still alive)
+        if player_acted and opponent["hp"] > 0:
+            if opponent["stamina"] >= 50 and random.random() < 0.5: # 50% chance to use ultimate move
+                player_poketmon["hp"] -= opponent["attack"] * 2
+                opponent["stamina"] -= 50
+                print(f"\033[1;95m{opponent['name']} unleashed its ultimate move on {player_poketmon['name']}! Your HP is now {player_poketmon['hp']}.\033[0m\n")
+                if player_poketmon["hp"] <= 0:
+                    print("\033[38;5;52mYou fainted.. better luck next time!💫\033[0m")
+                    break
+            elif opponent["stamina"] > 0:
+                player_poketmon["hp"] -= opponent["attack"]
+                opponent["stamina"] -= 10
+                print(f"{opponent['name']} attacked back! Your HP is now {player_poketmon['hp']}. {opponent['name']}'s stamina is now {opponent['stamina']}.\n")
+                if player_poketmon["hp"] <= 0:
+                    print("\033[38;5;52mYou fainted.. better luck next time!💫\033[0m")
+                    break
+            else:
+                print(f"{opponent['name']} is out of stamina and must recharge!")
+                opponent["stamina"] += 20
+                print(f"\033[93m{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\033[0m\n")
 
     print("")
     
@@ -225,6 +236,7 @@ def game():
                  exit()
                  break
              game()
+
     else: 
             print("You dip out of the battle and leave the forest behind.")
             print("Not in the mood today. Fair enough.")
@@ -238,3 +250,4 @@ def game():
                  break
              game()
 game()
+# End of the game function
