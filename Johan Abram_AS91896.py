@@ -4,7 +4,7 @@ import msvcrt
 def game():
 
     # Prints welcome message
-    print("""\033[93m
+    print("""\033[96m
   ____       _        _                         
  |  _ \ ___ | | _____| |_ _ __ ___   ___  _ __  
  | |_) / _ \| |/ / _ \ __| '_ ` _ \ / _ \| '_ \ 
@@ -141,10 +141,12 @@ def game():
     print("It's a wild {} it has {} hp.".format(opponent["name"], opponent["hp"]))
     print("You call in your Pokétmon {} to battle against the wild {}!\n".format(player_poketmon["name"], opponent["name"]))
 
+    recharge_count = 0
+    max_recharges = 2   
     # Battle loop: player and opponent take turns attacking, using stamina
     while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
         print("\033[1;97mWhat do you want to do? (attack/run)\033[0m")
-        print("Press [space] to attack, press [X] for ultimate move or type [L] to run away.")
+        print("Press [space] to attack, press [X] for ultimate move, press [R] to recharge or type [L] to run away.")
         action = msvcrt.getwch()
         player_acted = False
         if action == ' ':
@@ -167,7 +169,7 @@ def game():
         elif action == 'x':
             # Ultimate move, requires full stamina
             if player_poketmon["stamina"] >= 50:
-                opponent["hp"] -= player_poketmon["attack"] * 2 # Ultimate move does 2.5x damage
+                opponent["hp"] -= player_poketmon["attack"] * 2 # Ultimate move does 2x damage
                 player_poketmon["stamina"] -= 50
                 print(f"\033[1;93m{player_poketmon['name']} unleashed its ultimate move on {opponent['name']}! Its HP is now {opponent['hp']}.\033[0m\n")
                 player_acted = True
@@ -176,7 +178,18 @@ def game():
                     break
             else:
                 print(f"\033[91mNot enough stamina for ultimate move! You need at least 50 stamina.\033[0m\n")
-                player_acted = True        
+                player_acted = True 
+
+        elif action == 'r':
+            if recharge_count < max_recharges:
+                player_poketmon["stamina"] += 20
+                player_poketmon["hp"] += 10
+                recharge_count += 1
+                print(f"\033[96m{player_poketmon['name']} used recharge! Stamina: {player_poketmon['stamina']}, HP: {player_poketmon['hp']}.\033[0m")
+                print(f"\033[90mRecharges used: {recharge_count}/{max_recharges}\033[0m\n")
+                player_acted = True
+            else:
+                print("\033[91mYou're out of recharges for this battle!\033[0m\n")              
 
         elif action == 'l':
             print("You ran away safely.")
@@ -204,7 +217,8 @@ def game():
             else:
                 print(f"{opponent['name']} is out of stamina and must recharge!")
                 opponent["stamina"] += 20
-                print(f"\033[93m{opponent['name']} is recharging.. Stamina is now {opponent['stamina']}.\033[0m\n")
+                opponent["hp"] += 10 
+                print(f"\033[96m{opponent['name']} is using recharge! Stamina: {opponent['stamina']}, HP: {opponent['hp']}\033[0m\n")
 
     print("")
     
