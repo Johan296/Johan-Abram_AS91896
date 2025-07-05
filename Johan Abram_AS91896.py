@@ -140,14 +140,34 @@ def game():
     opponent = random.choice(opponents)
     print("It's a wild {} it has {} hp.".format(opponent["name"], opponent["hp"]))
     print("You call in your Pokétmon {} to battle against the wild {}!\n".format(player_poketmon["name"], opponent["name"]))
+    
+    # Instructions before battle begins
+    # Optional Battle Instructions
+    print("\033[96mBefore the battle begins, would you like to view instructions?\033[0m")
+    show_instructions = input("\033[1;97mEnter 'yes' to view instructions or 'no' to skip: \033[0m").lower()
+
+    while show_instructions not in ["yes", "no"]:
+        print("Invalid input. Please enter 'yes' or 'no'.")
+        show_instructions = input("\033[1;97mEnter 'yes' to view instructions or 'no' to skip: \033[0m").lower()
+
+    if show_instructions == "yes":
+        print("\n\033[94m--- Battle Instructions ---\033[0m")
+        print("🔹 Space [space] = Normal Attack: Deals damage and uses 10 stamina.")
+        print("🔹 X = Ultimate Move: Double damage, costs 50 stamina (requires full stamina).")
+        print("🔹 R = Recharge: Restore 20 stamina and 10 HP. You can recharge up to 3 times per battle.")
+        print("🔹 L = Run: Leave the battle and avoid the encounter.")
+        print("Your Pokétmon and the wild Pokétmon take turns. This is a turn based strategy game!")
+        print("\033[90m---------------------------\033[0m\n")
+    else:
+        print("\n\033[96mStarting battle!\033[0m\n")
 
     recharge_count = 0
     max_recharges = 3  # Maximum number of recharges allowed in a battle   
     # Battle loop: player and opponent take turns attacking, using stamina
     while player_poketmon["hp"] > 0 and opponent["hp"] > 0:
         print("\033[1;97mWhat do you want to do?\033[0m")
-        print("\033[1;97mChoose action: [space] = Attack | X = Ultimate | R = Recharge | L = Run\033[0m")
-        action = msvcrt.getwch()
+        print("\033[1;94mChoose action: [space] = Attack | X = Ultimate | R = Recharge | L = Run\033[0m")
+        action = msvcrt.getwch().lower()
         player_acted = False
         if action == ' ':
             # Check if player has stamina
@@ -239,7 +259,7 @@ def game():
 
     elif player_poketmon["hp"] <= 0:
             print(f"{player_poketmon['name']} hits the ground. The wild {opponent['name']} disappears into the trees.")
-            print("You recall your Pokétmon and walk out of the forest, not feeling defeated, just... done.")
+            print("You recall your Pokétmon and go to the health centre to recover its hp and stamina.")
             print("You win some, lose some.")
             print("\033[91mGAME OVER\033[0m")
             while True:
@@ -251,8 +271,9 @@ def game():
              game()
 
     else: 
-            print("You dip out of the battle and leave the forest behind.")
-            print("Not in the mood today. Fair enough.")
+            print("You dip out of the place and leave the wild Pokétmon behind.")
+            print("Not in the mood today to fight a wild Pokétmon.")
+            print("You head back home because it was getting dark.")
             print("Maybe next time.")
             print("\033[91mGAME OVER\033[0m")
             while True:

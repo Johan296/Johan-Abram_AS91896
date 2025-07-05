@@ -1,0 +1,76 @@
+My game is a story and turn based strategy game.
+START GAME
+Display welcome banner
+Asks user to enter trainer name
+Greet trainer and introduce the story
+
+-- DECISION 1: Go to Professor Clark's lab --
+Prompt: go to lab? (yes/no)
+IF "no":
+    Display alternate ending ("stay home")
+    Ask if player wants to play again
+    IF "yes": restart game
+    ELSE: exit
+IF "yes":
+    Continue to lab
+
+-- DECISION 2: Choose your Pokétmon --
+Prompt: ready to choose? (yes/no)
+IF "no":
+    Display ending ("go home")
+    Ask if player wants to play again
+    IF "yes": restart game
+    ELSE: exit
+IF "yes":
+    Show available Pokétmons with stats
+    Prompt: choose a, b, c, or d
+    Assign selected Pokétmon stats to player
+
+Display player Pokétmon stats and confirm selection
+
+-- DECISION 3: Begin Adventure --
+Prompt: enter forest or go home
+IF "home":
+    Display ending and ask for replay
+    Handle loop accordingly
+IF "forest":
+    Continue adventure
+
+-- Optional Battle Instructions --
+Ask if player wants to view battle instructions
+IF "yes":
+    Display action types: attack, ultimate, recharge, run
+
+-- WILD POKETMON BATTLE SYSTEM --
+Randomly choose an opponent Pokétmon with stats
+Sets recharge_count and max_recharges
+
+WHILE both player and opponent are alive:
+    Prompt for player action:
+        ' '  = normal attack
+        'x'  = ultimate move
+        'r'  = recharge stamina and HP
+        'l'  = run away
+
+    Handle each action with appropriate options:
+        - Attack reduces opponent HP, uses stamina
+        - Ultimate does 2x damage, requires 50 stamina
+        - Recharge restores stamina & HP (max 3 times)
+        - Run ends battle early
+
+    After player action:
+        IF opponent is defeated: win
+        ELSE: opponent attacks
+            Reduce player HP
+
+     Different endings based on your action:
+     IF player wins: Capture enemy pokétmon and leave. GAME OVER 
+     ELIF opponent wins: Opponent pokétmon run aways and you call your pokétmon back and go to the health centre. GAME OVER
+     ELSE: you run away mid battle, you don't fight the pokétmon and head back home because it was getting dark.    
+
+Display victory message
+
+END GAME or PLAY AGAIN
+Ask if player wants to play again
+IF "yes": restart game
+ELSE: Thanks the user and exits
