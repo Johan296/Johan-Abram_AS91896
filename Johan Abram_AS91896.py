@@ -246,7 +246,7 @@ def game():
     if opponent["hp"] <= 0:
             print(f"The wild {opponent['name']} fainted. {player_poketmon['name']} held its ground like a champ.")
             print(f"You give your {player_poketmon['name']} a pat on its head, and capture the wild {opponent['name']}.")
-            print("Then you head out of the forest with your new Pokétmon.")
+            print("Then you head back home with your new Pokétmon, beacuse it was getting dark.")
             print("That's it for now.")
             print("\033[92mGAME OVER\033[0m")
             while True:
@@ -260,6 +260,7 @@ def game():
     elif player_poketmon["hp"] <= 0:
             print(f"{player_poketmon['name']} hits the ground. The wild {opponent['name']} disappears into the trees.")
             print("You recall your Pokétmon and go to the health centre to recover its hp and stamina.")
+            
             print("You win some, lose some.")
             print("\033[91mGAME OVER\033[0m")
             while True:
@@ -284,4 +285,5 @@ def game():
                  break
              game()
 game()
+
 # End of the game function
